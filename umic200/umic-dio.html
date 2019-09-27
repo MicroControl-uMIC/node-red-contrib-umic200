@@ -1,0 +1,43 @@
+<script type="text/javascript">
+    RED.nodes.registerType('readPin',{
+        category: 'MicroControl',
+        color: '#e69e39',
+        defaults: {
+            name: {value:""},
+            pin: {value:""}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "arrow-in.png",
+        label: function() {
+            return this.name||"readPin";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="readPin">
+
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name"> 
+	</div>
+	
+    <div class="form-group">
+       <label for="node-input-pin">Select Pin</label>
+       <select class="form-control" id="node-input-pin">
+       	 <option>0</option>
+         <option>1</option>
+         <option>2</option>
+         <option>3</option>
+         <option>4</option>
+         <option>5</option>
+         <option>6</option>
+         <option>7</option>
+       </select>
+    </div>
+    
+</script>
+
+<script type="text/x-red" data-help-name="readPin">
+    <p>This is an example node to read Pins on the uMic.200 from MicroControl</p>
+</script>

@@ -1,0 +1,29 @@
+<script type="text/javascript">
+    RED.nodes.registerType('getSystemTemperature',{
+        category: 'MicroControl',
+        color: '#e69e39',
+        defaults: {
+            name: {value:""}
+        },
+        inputs:1,
+        outputs:1,
+        icon: "arrow-in.png",
+        label: function() {
+            return this.name||"getSystemTemperature";
+        }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="getSystemTemperature">
+
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name"> 
+	</div>
+    
+</script>
+
+<script type="text/x-red" data-help-name="getSystemTemperature">
+    <p>This is an example node to get the System Temperature on the uMic.200 from MicroControl</p>
+</script>
+
