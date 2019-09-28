@@ -1,20 +1,25 @@
 <script type="text/javascript">
-    RED.nodes.registerType('getSystemTemperature',{
-        category: 'MicroControl',
+    RED.nodes.registerType('temp',{
+        category: 'µMIC 200',
         color: '#e69e39',
         defaults: {
             name: {value:""}
         },
         inputs:1,
         outputs:1,
-        icon: "arrow-in.png",
+        icon: "font-awesome/fa-thermometer-0",
         label: function() {
-            return this.name||"getSystemTemperature";
+            return this.name||"temp";
         }
     });
 </script>
 
-<script type="text/x-red" data-template-name="getSystemTemperature">
+
+<script type="text/x-red" data-template-name="temp">
+
+    <p align="left"><strong>µMIC.200 </strong></p>
+
+    <img src="/node-red-contrib-canopen-mcan/icons/mcan-4xi.png" alt="µCAN.4.ai" style="width:257px;height:208px;align="middle">
 
     <div class="form-row">
         <label for="node-input-name"><i class="icon-tag"></i> Name</label>
@@ -23,7 +28,7 @@
     
 </script>
 
-<script type="text/x-red" data-help-name="getSystemTemperature">
+<script type="text/x-red" data-help-name="temp">
     <p>This is an example node to get the System Temperature on the uMic.200 from MicroControl</p>
 </script>
 
