@@ -16,12 +16,12 @@ let info = '';
 try
 {
   umic = require('/usr/local/lib/node_modules/umic');
-  info = 'using native library on µMIC.200 controller';
+  info = umic.info_get_library_version();
 } 
 catch (error)
 {
   umic = require('./libs/umic200');
-  info = 'using dummy library for testing';
+  info = umic.info_get_library_version();
 }
 
 
@@ -47,21 +47,30 @@ module.exports = function (RED) {
             var node = this;
 
             this.pin = config.pin;
-            this.interval_id = null;
+            
             this.on('input', this.input);
             this.on('close', this.close);
             
-            this.interval_id = setInterval(function() {
+            //---------------------------------------------------------------------------
+            // The intervalTime determines how often the digital input is sampled 
+            //
+            this.intervalTime = 100;
+            this.interval_id  = null;
+            this.interval_id  = setInterval(function() 
+            {
                 node.emit("input", {});
-              }, 1000);
+            }, this.intervalTime);
         }
         
         //------------------------------------------------------------------------------------
         // This method is called when the node is being stopped, e.g. a new flow
-        // cofiguration is deployed
+        // configuration is deployed
         //
         close() 
         {
+        	//---------------------------------------------------------------------------
+        	// Stop the interval timer
+        	//
             if (this.interval_id != null) 
             {
                 clearInterval(this.interval_id);
@@ -70,7 +79,8 @@ module.exports = function (RED) {
         }
          
         //------------------------------------------------------------------------------------
-        // 
+        // Get the state of the digital input
+        //
         input(msg) 
         {
             let result = umic.dio_get_input_pin(parseInt(this.pin));
