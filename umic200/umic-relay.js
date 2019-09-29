@@ -1,6 +1,7 @@
 /*jshint esversion: 6 */ 
 
-const umic = require ('/home/umic/.node-red/node_modules/umic/build/Release/umic.node');
+//const umic = require ('umic.node');
+const umic = require ('/Users/koppe/Projekte/uMIC-Lib/nodejs/build/Release/umic.node');
 
 module.exports = function(RED) {
     function UmicRelay(config) {
@@ -24,6 +25,6 @@ module.exports = function(RED) {
         });
         
     }
-    RED.nodes.registerType("relay",UmicRelay);
+    RED.nodes.registerType("umic-relay", UmicRelay);
 };
 

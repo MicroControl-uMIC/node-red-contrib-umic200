@@ -1,13 +1,13 @@
 <script type="text/javascript">
-    RED.nodes.registerType('relay',{
-        category: 'MicroControl',
+    RED.nodes.registerType('umic-relay',{
+        category: 'µMIC 200',
         color: '#e69e39',
         defaults: {
             name: {value:""},
             setTo: {value:""}
         },
         inputs:1,
-        outputs:1,
+        outputs:0,
         icon: "arrow-in.png",
         label: function() {
             return this.name||"relay";
@@ -15,7 +15,7 @@
     });
 </script>
 
-<script type="text/x-red" data-template-name="relay">
+<script type="text/x-red" data-template-name="umic-relay">
 
     <div class="form-row">
         <label for="node-input-name"><i class="icon-tag"></i> Name</label>
@@ -30,8 +30,4 @@
        </select>
     </div>
     
-</script>
-
-<script type="text/x-red" data-help-name="relay">
-    <p>This is an example node to set the relay on the uMic.200 from MicroControl</p>
 </script>
