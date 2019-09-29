@@ -1,7 +1,18 @@
 /*jshint esversion: 6 */ 
 
-//const umic = require ('umic.node');
-const umic = require ('/Users/koppe/Projekte/uMIC-Lib/nodejs/build/Release/umic.node');
+//------------------------------------------------------------------------------------------------------
+// Try to load the umic library
+//
+let umic = '';
+let info = '';
+try
+{
+  umic = require('/usr/local/lib/node_modules/umic');
+} 
+catch (error)
+{
+  umic = require('./libs/umic200');
+}
 
 module.exports = function(RED) {
     function UmicRelay(config) {
