@@ -1,11 +1,5 @@
 /*jshint esversion: 6 */
 
-//------------------------------------------------------------------------------------------------------
-// Required for version information of the module, this is only used in the first module
-//
-const path = require('path');
-const fs = require('fs');
-const pkg = require(path.join(__dirname, '..', 'package.json'));
 
 //------------------------------------------------------------------------------------------------------
 // Try to load the umic library
@@ -21,34 +15,14 @@ catch (error)
 }
 
 
-/*
- * module.exports = function(RED) {
- *  //
- * ----------------------------------------------------------------------------- //
- * RED.log.info('node-red-contrib-umic version: ' + pkg.version);
- * 
- * function UmicReadPin(config) { RED.nodes.createNode(this, config);
- * 
- * var node = this; this.pin = config.pin; this.outputs = config.outputs;
- * 
- * node.on('input', function(msg) { let result =
- * umic.dio_get_input_pin(parseInt(this.pin)); msg.payload = result;
- * node.send(msg); });
- *  } RED.nodes.registerType("umic-dio", UmicReadPin); };
- */
-
 
 module.exports = function (RED) {
     
-    //---------------------------------------------------------------------------------------------
-    // show version of package
-    //
-    RED.log.info('node-red-contrib-umic version: ' + pkg.version);
     
     //---------------------------------------------------------------------------------------------
-    // Definition of class 'UmicDioNode'
+    // Definition of class 'UmicDoNode'
     //
-    class UmicDioNode {
+    class UmicDoNode {
         constructor(config) {
             RED.nodes.createNode(this, config);
             this.pin=config.pin;
@@ -85,6 +59,6 @@ module.exports = function (RED) {
         }
     }
     
-    RED.nodes.registerType('umic-dio', UmicDioNode);
+    RED.nodes.registerType('umic-dio out', UmicDoNode);
 }
 
