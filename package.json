@@ -1,21 +1,21 @@
 {
-  "name": "node-red-contrib-canopen-mcan",
-  "version": "0.2.0",
-  "description": "Node-RED Nodes for MicroControl CANopen modules",
+  "name": "node-red-contrib-umic200",
+  "version": "0.7.0",
+  "description": "Node-RED Nodes for MicroControl µMIC.200 controller",
   "repository": "https://to-be-defined",
   "dependencies": {
-      "websocket": "^1.00.30"
   },
-  "keywords": [ "node-red", "CANopen", "MicroControl" ],
+  "keywords": [ "node-red", "µMIC.200", "MicroControl" ],
   "main": "none",
   "engines": {
       "node": ">= 8.0.0"
   },
   "node-red": {
     "nodes": {
-      "mcan-4ai": "canopen/mcan-4ai.js",
-      "mcan-4ao": "canopen/mcan-4ao.js",
-      "mcan-4ti": "canopen/mcan-4ti.js"
+      "umic-di"   : "umic200/umic-di.js",
+      "umic-do"   : "umic200/umic-do.js",
+      "umic-relay": "umic200/umic-relay.js",
+      "umic-temp" : "umic200/umic-temp.js"
     }
   },
   "author": "MicroControl GmbH & Co. KG",
