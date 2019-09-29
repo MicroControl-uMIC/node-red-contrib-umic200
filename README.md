@@ -1,14 +1,19 @@
-# node-red-contrib-canopen-mcan
+# node-red-contrib-umic200
 
-[![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
-[![License][mit-url]
 
-> Node-RED Nodes for MicroControl CANopen devices
+> Node-RED Nodes for MicroControl &micro;MIC.200 controller
 
-With these Nodes you can connect [MicroControl CANopen modules](https://www.microcontrol.net/en/products/io-module/box/) to 
+With these Nodes you can connect the internal interfaces of the 
+[MicroControl µMIC.200 controller](https://www.microcontrol.net/en/products/control-units/) to 
 [Node-RED](https://nodered.org/). 
 
+
 ## Requirements
+
+- &micro;MIC.200 controller
+
+The library `umic/libs/umic200` provides dummy functions for the internal interfaces of the
+&micro;MIC.200 controller, so the nodes can be evaluated on any system.
 
 
 
@@ -23,10 +28,16 @@ In your node-red user directory, typically `~/.node-red`, run:
 npm install <location of node module>
 ```
  
- 
 
 ## Install
 
+- install manually
+- install from node-red
+
 
 ## How to use
+
+- available nodes
+
+
 
