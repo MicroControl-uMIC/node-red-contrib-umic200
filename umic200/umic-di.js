@@ -4,38 +4,25 @@
 // Required for version information of the module, this is only used in the first module
 //
 const path = require('path');
-const fs = require('fs');
-const pkg = require(path.join(__dirname, '..', 'package.json'));
+const fs   = require('fs');
+const pkg  = require(path.join(__dirname, '..', 'package.json'));
+
 
 //------------------------------------------------------------------------------------------------------
 // Try to load the umic library
 //
+let umic = '';
+let info = '';
 try
 {
-    const umic = require('/usr/local/lib/node_modules/umic');
+  umic = require('/usr/local/lib/node_modules/umic');
+  info = 'using native library on µMIC.200 controller';
 } 
 catch (error)
 {
-    console.log('oh no big error');
-    console.log(error);
+  umic = require('./libs/umic200');
+  info = 'using dummy library for testing';
 }
-
-
-/*
- * module.exports = function(RED) {
- *  //
- * ----------------------------------------------------------------------------- //
- * RED.log.info('node-red-contrib-umic version: ' + pkg.version);
- * 
- * function UmicReadPin(config) { RED.nodes.createNode(this, config);
- * 
- * var node = this; this.pin = config.pin; this.outputs = config.outputs;
- * 
- * node.on('input', function(msg) { let result =
- * umic.dio_get_input_pin(parseInt(this.pin)); msg.payload = result;
- * node.send(msg); });
- *  } RED.nodes.registerType("umic-dio", UmicReadPin); };
- */
 
 
 module.exports = function (RED) {
@@ -43,48 +30,56 @@ module.exports = function (RED) {
     //---------------------------------------------------------------------------------------------
     // show version of package
     //
-    RED.log.info('node-red-contrib-umic version: ' + pkg.version);
+    RED.log.info('node-red-contrib-umic : version ' + pkg.version);
+    RED.log.info('node-red-contrib-umic : ' + info);
     
     //---------------------------------------------------------------------------------------------
-    // Definition of class 'UmicDioNode'
+    // Definition of class 'UmicDiNode'
     //
-    class UmicDioNode {
-        constructor(config) {
+    class UmicDiNode {
+        
+        //------------------------------------------------------------------------------------
+        // Constructor
+        //
+        constructor(config) 
+        {
             RED.nodes.createNode(this, config);
-            this.pin=config.pin;
-            this.outputs=config.outputs;
-            
+            var node = this;
+
+            this.pin = config.pin;
+            this.interval_id = null;
             this.on('input', this.input);
-            this.on('close', this.destructor);
+            this.on('close', this.close);
             
-            setInterval(this.trigger, 1200);
+            this.interval_id = setInterval(function() {
+                node.emit("input", {});
+              }, 1000);
         }
         
-        destructor(done) {
-            done();
+        //------------------------------------------------------------------------------------
+        // This method is called when the node is being stopped, e.g. a new flow
+        // cofiguration is deployed
+        //
+        close() 
+        {
+            if (this.interval_id != null) 
+            {
+                clearInterval(this.interval_id);
+            }
             
         }
-        
-        output(msg) {
+         
+        //------------------------------------------------------------------------------------
+        // 
+        input(msg) 
+        {
             let result = umic.dio_get_input_pin(parseInt(this.pin));
             msg.payload=result;
-            return msg.payload;
+            this.send(msg);
         }
         
-        input(msg) {
-            RED.log.info('bingo ');
-            let result = umic.info_get_system_temperature();
-            msg.payload=result;
-        }
-        
-        trigger()
-        {
-            // RED.log.info('bongo ');
-            // var newMsg = { payload: msg.payload.length }; --> this does not
-            // work
-        }
     }
     
-    RED.nodes.registerType('umic-dio', UmicDioNode);
+    RED.nodes.registerType('umic-dio in', UmicDiNode);
 }
 

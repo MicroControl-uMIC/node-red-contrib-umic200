@@ -1,22 +1,22 @@
 
 <script type="text/javascript">
-    RED.nodes.registerType('umic-dio',{
+    RED.nodes.registerType('umic-dio in',{
         category: 'µMIC 200',
         color: '#e69e39',
         defaults: {
             name: {value:""},
             pin: {value:""}
         },
-        inputs:1,
-        outputs:1,
+        inputs:  0,
+        outputs: 1,
         icon: "arrow-in.png",
         label: function() {
-            return this.name||"readPin";
+            return this.name||"umic-dio in";
         }
     });
 </script>
 
-<script type="text/x-red" data-template-name="umic-dio">
+<script type="text/x-red" data-template-name="umic-dio in">
 
     <div class="form-row">
         <label for="node-input-name"><i class="icon-tag"></i> Name</label>
@@ -39,6 +39,6 @@
     
 </script>
 
-<script type="text/x-red" data-help-name="umic-dio">
+<script type="text/x-red" data-help-name="umic-dio in">
     <p>This is an example node to read Pins on the uMic.200 from MicroControl</p>
 </script>
