@@ -1,21 +1,21 @@
 <script type="text/javascript">
-    RED.nodes.registerType('temp',{
+    RED.nodes.registerType('umic-temp',{
         category: 'µMIC 200',
         color: '#e69e39',
         defaults: {
             name: {value:""}
         },
-        inputs:1,
-        outputs:1,
+        inputs : 0,
+        outputs: 1,
         icon: "font-awesome/fa-thermometer-0",
         label: function() {
-            return this.name||"temp";
+            return this.name||"umic-temp";
         }
     });
 </script>
 
 
-<script type="text/x-red" data-template-name="temp">
+<script type="text/x-red" data-template-name="umic-temp">
 
     <p align="left"><strong>µMIC.200 </strong></p>
 
@@ -27,8 +27,3 @@
 	</div>
     
 </script>
-
-<script type="text/x-red" data-help-name="temp">
-    <p>This is an example node to get the System Temperature on the uMic.200 from MicroControl</p>
-</script>
-

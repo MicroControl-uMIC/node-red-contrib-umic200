@@ -4,30 +4,31 @@
 //Try to load the umic library
 //
 let umic = '';
-//require('/usr/local/lib/node_modules/umic');
 try
 {
     umic = require('/usr/local/lib/node_modules/umic2');
 } 
 catch (error)
 {
-    umic = require('./libs/umic_dummy');
-    console.log('Using umic dummy libary');
+    umic = require('./libs/umic200');
 }
 
 
 
-/*
 module.exports = function(RED) {
-	RED.log.info('node-red-contrib-umic version: ' + pkg.version);
 	
-    function UmicGetSystemTemperature(config) {
+    function UmicTempNode(config) {
         RED.nodes.createNode(this,config);
         
         var node = this;
         this.pin=config.pin;
         this.outputs=config.outputs;
         
+       
+        setInterval(function() {
+          node.emit("input", {});
+        }, 1000);
+
         node.on('input', function(msg) {
             let result = umic.info_get_system_temperature();
             msg.payload=result;
@@ -36,26 +37,36 @@ module.exports = function(RED) {
 
     }
     
-    RED.nodes.registerType("temp",UmicGetSystemTemperature);
+    RED.nodes.registerType("umic-temp",UmicTempNode);
 };
-*/
 
+
+/*
 module.exports = function (RED) {
+	"use strict";
 	
     class UmicTempNode {
+
         constructor(config) {
             RED.nodes.createNode(this, config);
+            this.topic = config.topic;
             this.pin=config.pin;
             this.outputs=config.outputs;
-            
             this.on('input', this.input);
-            this.on('close', this.destructor);
-            
-            setInterval(this.trigger, 1200);
+            this.on('close', this.close);
+            //setInterval(this.trigger, 1000);
+            setInterval(function() {
+                //emit("input", {});
+            }, 1000);
         }
         
-        destructor(done){
-        	done();
+        //---
+        // this method is called when the node is being stopped, e.g. a new flow
+        // cofiguration is deployed
+        //
+        close() {
+            RED.log.info('close called with ' + done);
+        	//done();
         	
         }
         
@@ -65,18 +76,27 @@ module.exports = function (RED) {
         	return msg.payload;
         }
         
+        
         input(msg) {
         	RED.log.info('bingo ');
         	let result = umic.info_get_system_temperature();
             msg.payload=result;
         }
         
+        
         trigger()
         {
-        	// RED.log.info('bongo ');
+        	RED.log.info('bongo ');
+        	var self = this;
+        	setImmediate(function() {
+        	    //self.emit("input", {});
+        	}
+        	);
+        	//node.emit();
         	// var newMsg = { payload: msg.payload.length }; --> this does not work
         }
     }
     
-    RED.nodes.registerType('temp', UmicTempNode);
+    RED.nodes.registerType('umic-temp', UmicTempNode);
 }
+*/
