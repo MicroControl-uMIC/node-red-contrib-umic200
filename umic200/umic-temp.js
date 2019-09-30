@@ -1,12 +1,15 @@
 /*jshint esversion: 6 */ 
 
+//"use strict";
+
+    
 //------------------------------------------------------------------------------------------------------
 //Try to load the umic library
 //
 let umic = '';
 try
 {
-    umic = require('/usr/local/lib/node_modules/umic2');
+    umic = require('/usr/local/lib/node_modules/umic');
 } 
 catch (error)
 {
@@ -14,89 +17,62 @@ catch (error)
 }
 
 
-
-module.exports = function(RED) {
-	
-    function UmicTempNode(config) {
-        RED.nodes.createNode(this,config);
-        
-        var node = this;
-        this.pin=config.pin;
-        this.outputs=config.outputs;
-        
-       
-        setInterval(function() {
-          node.emit("input", {});
-        }, 1000);
-
-        node.on('input', function(msg) {
-            let result = umic.info_get_system_temperature();
-            msg.payload=result;
-            node.send(msg);
-        });
-
-    }
-    
-    RED.nodes.registerType("umic-temp",UmicTempNode);
-};
-
-
-/*
 module.exports = function (RED) {
-	"use strict";
-	
+    
+    //---------------------------------------------------------------------------------------------
+    // Definition of class 'UmicTempNode'
+    //
     class UmicTempNode {
 
         constructor(config) {
             RED.nodes.createNode(this, config);
-            this.topic = config.topic;
-            this.pin=config.pin;
-            this.outputs=config.outputs;
+            var node = this;
+            
+            this.pin = config.pin;
+            this.pinState = false;
             this.on('input', this.input);
             this.on('close', this.close);
-            //setInterval(this.trigger, 1000);
-            setInterval(function() {
-                //emit("input", {});
-            }, 1000);
+            
+            //---------------------------------------------------------------------------
+            // The intervalTime determines how often the temperature is sampled 
+            //
+            this.intervalTime = 2000;
+            this.interval_id  = null;
+            this.interval_id  = setInterval(function() 
+            {
+                node.emit("input", {});
+            }, this.intervalTime);
         }
         
-        //---
-        // this method is called when the node is being stopped, e.g. a new flow
-        // cofiguration is deployed
+        //------------------------------------------------------------------------------------
+        // This method is called when the node is being stopped, e.g. a new flow
+        // configuration is deployed
         //
-        close() {
-            RED.log.info('close called with ' + done);
-        	//done();
-        	
-        }
-        
-        output(msg) {
-        	let result = umic.info_get_system_temperature();
-            msg.payload=result;
-        	return msg.payload;
-        }
-        
-        
-        input(msg) {
-        	RED.log.info('bingo ');
-        	let result = umic.info_get_system_temperature();
-            msg.payload=result;
-        }
-        
-        
-        trigger()
+        close() 
         {
-        	RED.log.info('bongo ');
-        	var self = this;
-        	setImmediate(function() {
-        	    //self.emit("input", {});
-        	}
-        	);
-        	//node.emit();
-        	// var newMsg = { payload: msg.payload.length }; --> this does not work
+            //---------------------------------------------------------------------------
+            // Stop the interval timer
+            //
+            if (this.interval_id != null) 
+            {
+                clearInterval(this.interval_id);
+            }
+            
         }
+        
+        
+        //------------------------------------------------------------------------------------
+        // Get the value of the system temperature
+        //
+        input(msg) 
+        {
+            let result = umic.info_get_system_temperature();
+            msg.payload = result;
+            this.send(msg);
+        }
+        
     }
     
     RED.nodes.registerType('umic-temp', UmicTempNode);
 }
-*/
+
