@@ -1,17 +1,18 @@
 /*jshint esversion: 6 */
 
+"use strict";
 
 //------------------------------------------------------------------------------------------------------
-// Try to load the umic library
+//Try to load the umic library
 //
+let umic = '';
 try
 {
-    const umic = require('/usr/local/lib/node_modules/umic');
+    umic = require('/usr/local/lib/umic.node');
 } 
 catch (error)
 {
-    console.log('oh no big error');
-    console.log(error);
+    umic = require('./libs/umic200');
 }
 
 
@@ -23,40 +24,41 @@ module.exports = function (RED) {
     // Definition of class 'UmicDoNode'
     //
     class UmicDoNode {
-        constructor(config) {
+        
+        //------------------------------------------------------------------------------------
+        // Constructor
+        //
+        constructor(config) 
+        {
             RED.nodes.createNode(this, config);
             this.pin=config.pin;
             this.outputs=config.outputs;
             
+            umic.dio_set_direction_pin(this.pin, true);
             this.on('input', this.input);
-            this.on('close', this.destructor);
-            
-            setInterval(this.trigger, 1200);
-        }
-        
-        destructor(done) {
-            done();
+            this.on('close', this.close);
             
         }
+
         
-        output(msg) {
-            let result = umic.dio_get_input_pin(parseInt(this.pin));
-            msg.payload=result;
-            return msg.payload;
-        }
-        
-        input(msg) {
-            RED.log.info('bingo ');
-            let result = umic.info_get_system_temperature();
-            msg.payload=result;
-        }
-        
-        trigger()
+        //------------------------------------------------------------------------------------
+        // This method is called when the node is being stopped, e.g. a new flow
+        // configuration is deployed
+        //
+        close() 
         {
-            // RED.log.info('bongo ');
-            // var newMsg = { payload: msg.payload.length }; --> this does not
-            // work
+            
         }
+        
+        //------------------------------------------------------------------------------------
+        // Set the state of the digital output
+        //
+        input(msg) 
+        {
+            RED.log.info('set output to ' + msg.payload);
+            umic.dio_set_output_pin(this.pin, msg.payload);
+        }
+        
     }
     
     RED.nodes.registerType('umic-dio out', UmicDoNode);
