@@ -2,7 +2,7 @@
   "name": "node-red-contrib-umic200",
   "version": "0.7.0",
   "description": "Node-RED Nodes for MicroControl µMIC.200 controller",
-  "repository": "https://to-be-defined",
+  "repository": "https://github.com/MicroControl-uMIC/node-red-contrib-umic200.git",
   "dependencies": {
   },
   "keywords": [ "node-red", "µMIC.200", "MicroControl" ],
