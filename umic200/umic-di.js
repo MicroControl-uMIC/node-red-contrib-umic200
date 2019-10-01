@@ -56,7 +56,7 @@ module.exports = function (RED) {
             //---------------------------------------------------------------------------
             // The intervalTime determines how often the digital input is sampled 
             //
-            this.intervalTime = 1500;
+            this.intervalTime = 100;
             this.interval_id  = null;
             this.interval_id  = setInterval(function() 
             {
@@ -90,6 +90,7 @@ module.exports = function (RED) {
             {
                 this.pinState = result;
                 msg.payload = this.pinState;
+                msg.topic   = 'umic-dio/' + this.inputNumber;
                 this.send(msg);
             }
         }
