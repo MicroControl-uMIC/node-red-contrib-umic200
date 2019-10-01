@@ -2,16 +2,16 @@
 <script type="text/javascript">
     RED.nodes.registerType('umic-dio out',{
         category: 'µMIC 200',
-        color: '#EF7C00',
+        color: '#FFCC66',
         defaults: {
             name: {value:""},
-            pin: {value:""}
+            terminal: {value:""}
         },
         inputs:  1,
         outputs: 0,
         icon: "arrow-in.png",
         label: function() {
-            return this.name||"umic-do";
+            return this.name||"umic-dio out";
         }
     });
 </script>
@@ -24,9 +24,8 @@
 	</div>
 	
     <div class="form-group">
-       <label for="node-input-pin">Select Pin</label>
-       <select class="form-control" id="node-input-pin">
-       	 <option>0</option>
+       <label for="node-output-terminal">Select terminal</label>
+       <select class="form-control" id="node-output-terminal">
          <option>1</option>
          <option>2</option>
          <option>3</option>
@@ -34,11 +33,8 @@
          <option>5</option>
          <option>6</option>
          <option>7</option>
+         <option>8</option>
        </select>
     </div>
     
-</script>
-
-<script type="text/x-red" data-help-name="umic-dio out">
-    <p>This is an example node to read Pins on the uMic.200 from MicroControl</p>
 </script>

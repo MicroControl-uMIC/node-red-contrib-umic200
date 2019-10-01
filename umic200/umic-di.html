@@ -5,11 +5,12 @@
         color: '#FFCC66',
         defaults: {
             name: {value:""},
-            pin: {value:""}
+            terminal: {value:""}
         },
         inputs:  0,
         outputs: 1,
         icon: "umic_dio.png",
+
         label: function() {
             return this.name||"umic-dio in";
         }
@@ -24,9 +25,8 @@
 	</div>
 	
     <div class="form-group">
-       <label for="node-input-pin">Select Pin</label>
-       <select class="form-control" id="node-input-pin">
-       	 <option>0</option>
+       <label for="node-input-terminal">Select terminal</label>
+       <select class="form-control" id="node-input-terminal">
          <option>1</option>
          <option>2</option>
          <option>3</option>
@@ -34,11 +34,8 @@
          <option>5</option>
          <option>6</option>
          <option>7</option>
+         <option>8</option>
        </select>
     </div>
     
-</script>
-
-<script type="text/x-red" data-help-name="umic-dio in">
-    <p>This is an example node to read Pins on the uMic.200 from MicroControl</p>
 </script>
