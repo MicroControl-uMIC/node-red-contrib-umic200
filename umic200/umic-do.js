@@ -3,7 +3,7 @@
 "use strict";
 
 //------------------------------------------------------------------------------------------------------
-//Try to load the umic library
+// Try to load the umic library
 //
 let umic = '';
 try
@@ -56,7 +56,6 @@ module.exports = function (RED) {
         //
         input(msg) 
         {
-            RED.log.info('set output + ' + this.outputNumber + ' to ' + msg.payload);
             umic.dio_set_output_pin(this.outputNumber - 1, msg.payload);
         }
         
