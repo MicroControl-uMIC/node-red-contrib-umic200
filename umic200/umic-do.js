@@ -34,7 +34,7 @@ module.exports = function (RED) {
             
             this.outputNumber = config.outputNumber;
             
-            umic.dio_set_direction_pin(this.outputNumber - 1, 1);
+            umic.dio_set_direction_pin(this.outputNumber - 1, true);
             
             this.on('input', this.input);
             this.on('close', this.close);
