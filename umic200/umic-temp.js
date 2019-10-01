@@ -1,6 +1,6 @@
 /*jshint esversion: 6 */ 
 
-//"use strict";
+"use strict";
 
     
 //------------------------------------------------------------------------------------------------------
@@ -9,7 +9,7 @@
 let umic = '';
 try
 {
-    umic = require('/usr/local/lib/node_modules/umic');
+    umic = require('/usr/local/lib/umic.node');
 } 
 catch (error)
 {
@@ -28,8 +28,6 @@ module.exports = function (RED) {
             RED.nodes.createNode(this, config);
             var node = this;
             
-            this.pin = config.pin;
-            this.pinState = false;
             this.on('input', this.input);
             this.on('close', this.close);
             
