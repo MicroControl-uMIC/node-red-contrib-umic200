@@ -85,17 +85,13 @@ module.exports = function (RED) {
         //
         input(msg) 
         {
-            let result = umic.dio_get_input_pin(parseInt(this.inputNumber));
-            msg.payload = result;
-            this.send(msg);
-            /*
+            let result = umic.dio_get_input_pin(parseInt(this.inputNumber) - 1);
             if (result != this.pinState)
             {
                 this.pinState = result;
                 msg.payload = this.pinState;
                 this.send(msg);
             }
-            */
         }
         
     }
