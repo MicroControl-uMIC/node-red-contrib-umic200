@@ -1,0 +1,24 @@
+<!-- Help text, for detailed information: https://nodered.org/docs/creating-nodes/help-style-guide -->
+
+
+<script type="text/x-red" data-help-name="umic-dio in" lang="de-DE">
+<p>Digitaler Eingang auf der &micro;MIC.200 Steuerung.</p>
+
+<h3>Ausgaben</h3>
+    <ol class="node-ports">
+        <dl class="message-properties">
+            <dt>payload <span class="property-type">Number</span></dt>
+                 <dd>Die Nutzdaten sind 0 bei einer logischen 0 am Eingang bzw. 1 bei einer
+                     logischen 1 am Eingang.</dd>
+             </dl>
+        <dl class="message-properties">
+            <dt>topic <span class="property-type">String</span></dt>
+                 <dd>Die Nutzdaten sind 0 bei einer logischen 0 am Eingang bzw. 1 bei einer
+                     logischen 1 am Eingang.</dd>
+             </dl>
+     </ol>
+
+<h3>Details</h3>
+Der Knoten generiert eine <code>msg.payload</code> mit einem Wert von 0 oder 1 in Abhängigkeit 
+vom Status des digitalen Eingangs.
+</script>
