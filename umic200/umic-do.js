@@ -31,10 +31,11 @@ module.exports = function (RED) {
         constructor(config) 
         {
             RED.nodes.createNode(this, config);
-            this.pin=config.pin;
-            this.outputs=config.outputs;
             
-            umic.dio_set_direction_pin(this.pin, true);
+            this.outputNumber = config.outputNumber;
+            
+            umic.dio_set_direction_pin(this.outputNumber - 1, 1);
+            
             this.on('input', this.input);
             this.on('close', this.close);
             
@@ -55,8 +56,8 @@ module.exports = function (RED) {
         //
         input(msg) 
         {
-            RED.log.info('set output to ' + msg.payload);
-            umic.dio_set_output_pin(this.pin, msg.payload);
+            RED.log.info('set output + ' + this.outputNumber + ' to ' + msg.payload);
+            umic.dio_set_output_pin(this.outputNumber - 1, msg.payload);
         }
         
     }
