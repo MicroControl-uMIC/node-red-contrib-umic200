@@ -1,0 +1,7 @@
+{
+    "umic-di" : {
+        "labelName"   : "Name",
+        "labelInpSel" : "Eingang auswählen",
+        "labelInpNum" : "Eingang"
+    }
+}

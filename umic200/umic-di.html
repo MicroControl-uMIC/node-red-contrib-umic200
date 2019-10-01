@@ -5,7 +5,7 @@
         color: '#FFCC66',
         defaults: {
             name: {value:""},
-            terminal: {value:""}
+            inputNumber: {value:""}
         },
         inputs:  0,
         outputs: 1,
@@ -20,13 +20,13 @@
 <script type="text/x-red" data-template-name="umic-dio in">
 
     <div class="form-row">
-        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <label for="node-input-name"> <span data-i18n="umic-di.labelName"></span> </label>
         <input type="text" id="node-input-name" placeholder="Name"> 
 	</div>
 	
     <div class="form-group">
-       <label for="node-input-terminal">Select terminal</label>
-       <select class="form-control" id="node-input-terminal">
+       <label for="node-input-terminal"><span data-i18n="umic-di.labelInpSel"></span></label>
+       <select class="form-control" id="node-input-inputNumber">
          <option>1</option>
          <option>2</option>
          <option>3</option>

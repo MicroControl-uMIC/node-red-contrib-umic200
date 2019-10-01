@@ -1,12 +1,13 @@
 /*jshint esversion: 6 */
 
+"use strict";
+
 //------------------------------------------------------------------------------------------------------
 // Required for version information of the module, this is only used in the first module
 //
 const path = require('path');
 const fs   = require('fs');
 const pkg  = require(path.join(__dirname, '..', 'package.json'));
-
 
 //------------------------------------------------------------------------------------------------------
 // Try to load the umic library
@@ -15,13 +16,13 @@ let umic = '';
 let info = '';
 try
 {
-  umic = require('/usr/local/lib/node_modules/umic');
-  info = umic.info_get_library_version();
+    umic = require('/usr/local/lib/umic.node');
+    info = umic.info_get_library_version();
 } 
 catch (error)
 {
-  umic = require('./libs/umic200');
-  info = umic.info_get_library_version();
+    umic = require('./libs/umic200');
+    info = umic.info_get_library_version();
 }
 
 
@@ -46,7 +47,8 @@ module.exports = function (RED) {
             RED.nodes.createNode(this, config);
             var node = this;
 
-            this.pin = config.pin;
+            this.inputNumber = config.inputNumber;
+            this.inputState  = false;
             
             this.on('input', this.input);
             this.on('close', this.close);
@@ -54,7 +56,7 @@ module.exports = function (RED) {
             //---------------------------------------------------------------------------
             // The intervalTime determines how often the digital input is sampled 
             //
-            this.intervalTime = 100;
+            this.intervalTime = 1500;
             this.interval_id  = null;
             this.interval_id  = setInterval(function() 
             {
@@ -83,9 +85,17 @@ module.exports = function (RED) {
         //
         input(msg) 
         {
-            let result = umic.dio_get_input_pin(parseInt(this.pin));
-            msg.payload=result;
+            let result = umic.dio_get_input_pin(parseInt(this.inputNumber));
+            msg.payload = result;
             this.send(msg);
+            /*
+            if (result != this.pinState)
+            {
+                this.pinState = result;
+                msg.payload = this.pinState;
+                this.send(msg);
+            }
+            */
         }
         
     }
