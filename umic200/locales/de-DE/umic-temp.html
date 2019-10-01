@@ -1,6 +1,19 @@
 <!-- Help text, for detailed information: https://nodered.org/docs/creating-nodes/help-style-guide -->
 
 <script type="text/x-red" data-help-name="umic-temp" lang="de-DE">
-<p>Messung der System Temperatur auf der &micro;MIC.200 Steuerung</p>
- 
+<p>System Temperatur auf der &micro;MIC.200 Steuerung</p>
+
+<h3>Ausgaben</h3>
+    <ol class="node-ports">
+        <dl class="message-properties">
+            <dt>payload <span class="property-type">Number</span></dt>
+                 <dd>Die Nutzdaten entsprechen der Temperatur.</dd>
+             </dl>
+     </ol>
+
+<p>
+<h3>Details</h3>
+Der Knoten generiert eine <code>msg.payload</code> mit einem Zahlenwert für die
+System Temperatur in &deg;C der &micro;MIC.200 Steuerung. Der Messwert wird alle 2 Sekunden
+vom Knoten gesendet.
 </script>

@@ -7,13 +7,17 @@
 <h3>Eingaben</h3>
     <ol class="node-ports">
         <dl class="message-properties">
-            <dt>payload <span class="property-type">Number</span></dt>
-                 <dd>Die Nutzdaten sind 0 bei einer logischen 0 am Eingang bzw. 1 bei einer
-                     logischen 1 am Eingang.</dd>
+            <dt>payload <span class="property-type">Boolean</span></dt>
+                 <dd>Zum Steuern des Ausgangs werden die Werte <code>true</code> oder 
+                     <code>false</code> akzeptiert.</dd>
         </dl>
      </ol>
 
 <h3>Details</h3>
-Der Knoten akzeptiert eine <code>msg.payload</code> mit einem Wert von 0 oder 1 in Abhängigkeit 
-vom Status des digitalen Eingangs.
+Der Knoten akzeptiert eine <code>msg.payload</code> mit einem <code>Boolean</code> Wert. Der 
+Wert <code>true</code> schaltet den Ausgang ein, der Wert <code>false</code> schaltet den
+Ausgang aus.
+<p>
+Der aktuelle Zustand des Ausgangs kann über einen digitalen Eingangsknoten vom Typ
+<code>umic-dio in</code> überwacht werden. 
 </script>

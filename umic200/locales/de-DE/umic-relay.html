@@ -1,6 +1,20 @@
 <!-- Help text, for detailed information: https://nodered.org/docs/creating-nodes/help-style-guide -->
 
 <script type="text/x-red" data-help-name="umic-relay" lang="de-DE">
-<p>Zugriff auf Relais Ausgang auf der &micro;MIC.200 Steuerung</p>
- 
+<p>Relais Ausgang auf der &micro;MIC.200 Steuerung</p>
+
+<h3>Eingaben</h3>
+    <ol class="node-ports">
+        <dl class="message-properties">
+            <dt>payload <span class="property-type">Boolean</span></dt>
+                 <dd>Zum Steuern des Relais werden die Werte <code>true</code> oder 
+                     <code>false</code> akzeptiert.</dd>
+        </dl>
+     </ol>
+
+<h3>Details</h3>
+Der Knoten akzeptiert eine <code>msg.payload</code> mit einem <code>Boolean</code> Wert. Der 
+Wert <code>true</code> schaltet das Relais ein, der Wert <code>false</code> schaltet das
+Relais aus.
+
 </script>

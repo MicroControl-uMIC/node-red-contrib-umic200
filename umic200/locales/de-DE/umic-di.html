@@ -7,18 +7,19 @@
 <h3>Ausgaben</h3>
     <ol class="node-ports">
         <dl class="message-properties">
-            <dt>payload <span class="property-type">Number</span></dt>
-                 <dd>Die Nutzdaten sind 0 bei einer logischen 0 am Eingang bzw. 1 bei einer
-                     logischen 1 am Eingang.</dd>
+            <dt>payload <span class="property-type">Boolean</span></dt>
+                 <dd>Die Nutzdaten sind <code>false</code> bei einer logischen 0 am Eingang bzw. 
+                     <code>true</code> bei einer logischen 1 am Eingang.</dd>
              </dl>
         <dl class="message-properties">
             <dt>topic <span class="property-type">String</span></dt>
-                 <dd>Die Nutzdaten sind 0 bei einer logischen 0 am Eingang bzw. 1 bei einer
-                     logischen 1 am Eingang.</dd>
+                 <dd>Das Topic wird auf <code>umic-dio/{inputNumber}</code> gesetzt.<br></dd>
              </dl>
      </ol>
 
+<p>
 <h3>Details</h3>
-Der Knoten generiert eine <code>msg.payload</code> mit einem Wert von 0 oder 1 in Abhängigkeit 
-vom Status des digitalen Eingangs.
+Der Knoten generiert eine <code>msg.payload</code> mit einem Wert von <code>true</code> oder 
+<code>false</code> in Abhängigkeit vom Status des digitalen Eingangs. Der Knoten generiert
+nur eine Nachricht wenn sich der Status des digitalen Eingangs ändert.
 </script>
