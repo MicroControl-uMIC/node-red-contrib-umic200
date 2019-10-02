@@ -3,4 +3,21 @@
 
 <script type="text/x-red" data-help-name="umic-dio in" lang="en-US">
     <p>This is an example node to read Pins on the uMic.200 from MicroControl</p>
+    
+    <h3>Outputs</h3>
+    <ol class="node-ports">
+        <dl class="message-properties">
+            <dt>payload <span class="property-type">Number</span></dt>
+                 <dd>Payload is <code>false</code> if there is a logical 0 at corresponding input. 
+                 Payload is <code>true</code> if there is a logical 1 at corresponding input.</dd>
+             </dl>
+        <dl class="message-properties">
+            <dt>topic <span class="property-type">String</span></dt>
+                 <dd>Topic is set to <code>umic-dio/{inputNumber}</code>. </dd>
+             </dl>
+     </ol>
+
+<h3>Details</h3>
+The node generates a <code>msg.payload</code> containing the value <code>true</code> or <code>false</code>, 
+which reflects the state of the digital input. The node only generates a message at an input stage change.
 </script>
