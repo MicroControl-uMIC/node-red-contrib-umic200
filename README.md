@@ -28,16 +28,3 @@ In your node-red user directory, typically `~/.node-red`, run:
 npm install <location of node module>
 ```
  
-
-## Install
-
-- install manually
-- install from node-red
-
-
-## How to use
-
-- available nodes
-
-
-
