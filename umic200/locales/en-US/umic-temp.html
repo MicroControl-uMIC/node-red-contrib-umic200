@@ -3,5 +3,18 @@
 <script type="text/x-red" data-help-name="umic-temp" lang="en-US">
 <p>Get system temperature on the &micro;MIC.200 controller</p>
 
+
+<h3>Outputs</h3>
+    <ol class="node-ports">
+        <dl class="message-properties">
+            <dt>payload <span class="property-type">Number</span></dt>
+                 <dd>The payload equals the temperature of the Controller.</dd>
+             </dl>
+     </ol>
+
+<p>
+<h3>Details</h3>
+The node generates a <code>msg.payload</code> containing the temperature of the Controller in °C. The node refreshes the 
+value every 2 seconds.
 </script>
 

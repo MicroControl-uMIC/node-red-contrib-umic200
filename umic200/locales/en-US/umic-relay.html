@@ -3,4 +3,15 @@
 <script type="text/x-red" data-help-name="umic-relay" lang="en-US">
 <p>Access to relay output on the &micro;MIC.200 controller</p>
  
+<h3>Inputs</h3>
+    <ol class="node-ports">
+        <dl class="message-properties">
+            <dt>payload <span class="property-type">Boolean</span></dt>
+                 <dd> To switch the relay only the values <code>true</code> of <code>false</code> are accepted.</dd>
+        </dl>
+     </ol>
+
+<h3>Details</h3>
+The node only accepts a <code>msg.payload</code> with the <code>Boolean</code> type. 
+The value <code>true</code> activates the relay. The value <code>false</code> deactivates the relay.
 </script>
