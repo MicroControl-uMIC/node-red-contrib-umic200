@@ -32,9 +32,9 @@ module.exports = function (RED) {
         {
             RED.nodes.createNode(this, config);
             
-            this.outputNumber = config.outputNumber;
+            let outputNumber = config.outputNumber;
             
-            umic.dio_set_direction_pin(this.outputNumber - 1, true);
+            umic.dio_set_direction_pin(outputNumber - 1, true);
             
             this.on('input', this.input);
             this.on('close', this.close);

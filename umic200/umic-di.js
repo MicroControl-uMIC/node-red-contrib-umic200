@@ -45,23 +45,36 @@ module.exports = function (RED) {
         constructor(config) 
         {
             RED.nodes.createNode(this, config);
-            var node = this;
+            const node = this;
 
-            this.inputNumber = config.inputNumber;
-            this.inputState  = false;
+            let inputNumber = config.inputNumber;
+            let inputState  = false;
             
-            this.on('input', this.input);
-            this.on('close', this.close);
+            node.on('input', node.input);
+            node.on('close', node.close);
+            
+            //---------------------------------------------------------------------------
+            // this is neccassary to store objects within node to access it in other
+            // functions
+            //
+            const context = node.context();
+            
+            //---------------------------------------------------------------------------
+            // keep the context
+            //
+            context.set('inputNumber', inputNumber);
+            context.set('inputState'  , inputState);
+            context.set('node'  , node);
             
             //---------------------------------------------------------------------------
             // The intervalTime determines how often the digital input is sampled 
             //
-            this.intervalTime = 100;
-            this.interval_id  = null;
-            this.interval_id  = setInterval(function() 
+            node.intervalTime = 100;
+            node.interval_id  = null;
+            node.interval_id  = setInterval(function() 
             {
                 node.emit("input", {});
-            }, this.intervalTime);
+            }, node.intervalTime);
         }
         
         //------------------------------------------------------------------------------------
@@ -70,12 +83,21 @@ module.exports = function (RED) {
         //
         close() 
         {
-        	//---------------------------------------------------------------------------
-        	// Stop the interval timer
-        	//
-            if (this.interval_id != null) 
+            //---------------------------------------------------------------------------
+            // neccassary to access context storage
+            //
+            let context = this.context();
+            
+            //---------------------------------------------------------------------------
+            // read context variable
+            //
+            const node = context.get('node');
+            //---------------------------------------------------------------------------
+            // Stop the interval timer
+            //
+            if (node.interval_id != null) 
             {
-                clearInterval(this.interval_id);
+                clearInterval(node.interval_id);
             }
             
         }
@@ -85,13 +107,24 @@ module.exports = function (RED) {
         //
         input(msg) 
         {
-            let result = umic.dio_get_input_pin(parseInt(this.inputNumber) - 1);
-            if (result != this.pinState)
+            //---------------------------------------------------------------------------
+            // neccassary to access context storage
+            //
+            let context = this.context();
+
+            //---------------------------------------------------------------------------
+            // read context variable
+            //
+            const inputNumber = context.get('inputNumber');
+            const node = context.get('node');
+        
+            let result = umic.dio_get_input_pin(parseInt(inputNumber) - 1);
+            if (result != this.inputState)
             {
-                this.pinState = result;
-                msg.payload = this.pinState;
-                msg.topic   = 'umic-dio/' + this.inputNumber;
-                this.send(msg);
+                this.inputState = result;
+                msg.payload = result;
+                msg.topic   = 'umic-dio/' + inputNumber;
+                node.send(msg);
             }
         }
         
