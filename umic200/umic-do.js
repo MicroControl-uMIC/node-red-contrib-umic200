@@ -31,13 +31,26 @@ module.exports = function (RED) {
         constructor(config) 
         {
             RED.nodes.createNode(this, config);
-            
+            const node = this;
+                        
             let outputNumber = config.outputNumber;
             
             umic.dio_set_direction_pin(outputNumber - 1, true);
             
-            this.on('input', this.input);
-            this.on('close', this.close);
+            this.on('input', node.input);
+            this.on('close', node.close);
+            
+            //---------------------------------------------------------------------------
+            // this is neccassary to store objects within node to access it in other
+            // functions
+            //
+            const context = node.context();
+            
+            //---------------------------------------------------------------------------
+            // keep the context
+            //
+            context.set('outputNumber'  , outputNumber);
+            context.set('node'  , node);
             
         }
 
@@ -56,7 +69,16 @@ module.exports = function (RED) {
         //
         input(msg) 
         {
-            umic.dio_set_output_pin(this.outputNumber - 1, msg.payload);
+            //---------------------------------------------------------------------------
+            // neccassary to access context storage
+            //
+            let context = this.context();
+            //---------------------------------------------------------------------------
+            // read context variable
+            //
+            const outputNumber = context.get('outputNumber');
+        
+            umic.dio_set_output_pin(outputNumber - 1, msg.payload);
         }
         
     }
