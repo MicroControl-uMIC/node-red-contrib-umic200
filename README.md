@@ -16,15 +16,11 @@ The library `umic/libs/umic200` provides dummy functions for the internal interf
 &micro;MIC.200 controller, so the nodes can be evaluated on any system.
 
 
+## Supported I/Os
 
-## Development
+Currently the following I/Os are supported by this plugin:
 
-To test the node module locally the `npm install <folder>` command can be used. This allows you to develop the node in a local 
-directory and have it linked into a local node-red install during development.
-
-In your node-red user directory, typically `~/.node-red`, run:
-
-```shell
-npm install <location of node module>
-```
- 
+* digital inputs
+* digital outputs
+* system temperature
+* relay 

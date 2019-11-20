@@ -1,6 +1,6 @@
 {
   "name": "node-red-contrib-umic-controller",
-  "version": "0.9.2",
+  "version": "0.9.4",
   "description": "Node-RED Nodes for MicroControl µMIC.200 controller",
   "repository": "https://github.com/MicroControl-uMIC/node-red-contrib-umic200.git",
   "dependencies": {
@@ -12,10 +12,10 @@
   },
   "node-red": {
     "nodes": {
+      "umic-temp" : "umic200/umic-temp.js",
       "umic-di"   : "umic200/umic-di.js",
       "umic-do"   : "umic200/umic-do.js",
-      "umic-relay": "umic200/umic-relay.js",
-      "umic-temp" : "umic200/umic-temp.js"
+      "umic-relay": "umic200/umic-relay.js"
     }
   },
   "author": "MicroControl GmbH & Co. KG",
